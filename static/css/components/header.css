@@ -1,0 +1,26 @@
+header {
+	background: #341568;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	width: 80%;
+	margin-inline: auto;
+	padding-block: 10px;
+	align-items: center;
+}
+
+.title h1 {
+	font-size: 3rem;
+}
+
+.login a {
+	font-size: 1.5rem;
+	text-decoration: none;
+	color: #59e50d;
+}
+
+.login a:hover {
+	color: #94dd6c;
+}
