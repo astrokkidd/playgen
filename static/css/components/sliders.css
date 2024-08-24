@@ -1,0 +1,32 @@
+.sliders {
+	background: #341568;
+	width: 20%;
+
+	border-radius: 15px;
+
+	padding-block: 10px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.sliders input {
+	width: 80%;
+	accent-color: #59e50d;
+}
+
+.sliders p {
+	margin-block: 6px;
+}
+
+.sliders a {
+	text-decoration: none;
+	color: #59e50d;
+	padding-block: 10px;
+}
+
+.sliders a:hover {
+	color: #94dd6c;
+}

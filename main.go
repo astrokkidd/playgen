@@ -1,15 +1,15 @@
 package main
 
 import (
-    "html/template"
-    "net/http"
-    "flag"
-    "fmt"
-    "io"
-    "log/slog"
+	"flag"
+	"fmt"
+	"html/template"
+	"io"
+	"log/slog"
+	"net/http"
 
-    "github.com/labstack/echo/v4"
-    "github.com/labstack/echo/v4/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 type TemplateRenderer struct {
@@ -17,24 +17,38 @@ type TemplateRenderer struct {
 }
 
 func (t *TemplateRenderer) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	err := t.templates.ExecuteTemplate(w, name, data)
+	tmpl, err := t.templates.Clone()
+	if err != nil {
+		return err
+	}
+
+	_, err = tmpl.ParseFiles(fmt.Sprintf("templates/%s", name))
+	if err != nil {
+		return err
+	}
+
+	err = tmpl.ExecuteTemplate(w, name, data)
 	if err != nil {
 		slog.Error("template failed to render", slog.String("error", err.Error()))
 		return err
 	}
-	return nil;
+	return nil
 }
 
 func home(c echo.Context) error {
 	data := map[string]interface{}{
 		"Title": "playgen",
 	}
-	return c.Render(http.StatusOK, "layout.gotmpl", data)
+	return c.Render(http.StatusOK, "content.gotmpl", data)
 }
 
 func main() {
 	port := flag.Int("p", 3000, "port")
 	e := echo.New()
+
+	router := http.NewServeMux()
+
+	router.HandleFunc("POST /login", logIn)
 
 	renderer := &TemplateRenderer{
 		templates: template.Must(template.ParseGlob("templates/*.gotmpl")),
@@ -46,9 +60,13 @@ func main() {
 	e.Use(middleware.Recover())
 
 	e.Static("/", "static")
-	
+
 	e.GET("/", home)
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", *port)))
-		
+
+}
+
+func logIn(w http.ResponseWriter, r *http.Request) {
+
 }

@@ -1,0 +1,19 @@
+{{ template "layout.gotmpl" .}}
+
+{{ define "content" }}
+	<div class = "sliders">
+		<p>acousticness</p>
+		<input type="range" min="0" max="100" value="50" class="slider" id="acousticness">
+		<p>danceability</p>
+		<input type="range" min="0" max="100" value="50" class="slider" id="danceability">
+		<p>energy</p>
+		<input type="range" min="0" max="100" value="50" class="slider" id="energy">
+		<p>instrumentalness</p>
+		<input type="range" min="0" max="100" value="50" class="slider" id="instrumentalness">
+		<p>speechiness</p>
+		<input type="range" min="0" max="100" value="50" class="slider" id="speechiness">
+		<p>valence</p>
+		<input type="range" min="0" max="100" value="50" class="slider" id="valence">
+		<a href="/generate" class="generate">GENERATE</a>	
+	</div>
+{{ end }}
