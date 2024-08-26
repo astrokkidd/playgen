@@ -163,6 +163,9 @@ func getAvailableSeedGenres(c echo.Context) error {
 		return err
 	}
 
+
+	fmt.Printf("\n\n%s\n\n", availableSeedGenres)
+
 	return c.Redirect(http.StatusFound, baseURI)
 }
 
@@ -238,7 +241,7 @@ func home(c echo.Context) error {
 	
 	data := map[string]interface{}{
 		"Title": "playgen",
-		"AvailableGenres": availableSeedGenres.Genres,
+		"AvailableSeedGenres": availableSeedGenres,
 	}
 	return c.Render(http.StatusOK, "content.gotmpl", data)
 }
@@ -250,6 +253,9 @@ func main() {
 	renderer := &TemplateRenderer{
 		templates: template.Must(template.ParseGlob("templates/*.gotmpl")),
 	}
+
+
+	fmt.Printf("\n\n%s\n\n", availableSeedGenres)
 
 	e.Renderer = renderer
 

@@ -9,7 +9,17 @@ input_tag.addEventListener("keyup", (e) => {
 		if (tags_list.some(e => e.text == val)) return;
 		if (val == "") return;
 		
-		//if val is not in list, return
+		var flag = 0;
+		
+		availableSeedGenres.genres.forEach(genre => {
+			if (val == genre) {
+				flag = 1;	
+			}
+		})
+
+		if (flag != 1) return;
+
+
 
 		const tags = val.split(',').map(e => e.trim()).filter(e => e !== "")
 
@@ -23,6 +33,18 @@ input_tag.addEventListener("keyup", (e) => {
 		RenderTags()
 	}
 })
+
+window.addEventListener("load", (e) => {
+	const available_seed_genres = document.querySelector(".available-seed-genres")
+	let cache = ""
+
+	availableSeedGenres.genres.forEach(e => {
+		cache = `<option value = "${e}">`;
+		available_seed_genres.insertAdjacentHTML("afterbegin", cache)
+	})
+
+})
+
 
 function RenderTags() {
 	const genre_tags = document.querySelector(".genre-tags")

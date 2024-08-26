@@ -1,8 +1,14 @@
 <div class = "genres">
 	<p>genres</p>
 	<div class = "genre-tags">
-		<input type="text" class="input-tag">
+		<input type="text" list="available-seed-genres" class="input-tag">
+		<datalist id="available-seed-genres" class="available-seed-genres">
+		</datalist>
 	</div>
 </div>
+
+<script type="text/javascript">
+	var availableSeedGenres = {{ .AvailableSeedGenres }}
+</script>
 
 <script src="/js/genre-tags.js"></script>
