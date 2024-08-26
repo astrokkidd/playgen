@@ -1,10 +1,15 @@
 .sliders {
 	background: #341568;
-	width: 20%;
 
-	border-radius: 15px;
+	margin: 20px;
+
+	border-radius: 40px;
 
 	padding-block: 10px;
+	padding-inline: 50px;
+
+	grid-column: 1 / span 1;
+	grid-row: 1 / span 1;
 
 	display: flex;
 	flex-direction: column;
@@ -13,18 +18,21 @@
 }
 
 .sliders input {
-	width: 80%;
+	width: 200px;
 	accent-color: #59e50d;
+	border: none;
 }
 
 .sliders p {
 	margin-block: 6px;
+	padding-top: 10px;
 }
 
 .sliders a {
 	text-decoration: none;
 	color: #59e50d;
-	padding-block: 10px;
+	padding-bottom: 10px;
+	padding-top: 20px;
 }
 
 .sliders a:hover {

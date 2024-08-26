@@ -1,11 +1,12 @@
 .footer {
-	padding-block: 5px;
 	display: flex;
 	justify-content: space-between;
 	background: #341568;
 }
 
 .footer p {
+	padding-block: 1rem;
 	text-align: center;
 	flex-grow: 1;
+	font-size: 1rem;
 }
