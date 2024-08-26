@@ -25,15 +25,24 @@ type TemplateRenderer struct {
 	templates *template.Template
 }
 
-type TokenResponse struct {
+type UserTokenResponse struct {
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
 	ExpiresIn    int    `json:"expires_in"`
 }
 
+type ClientTokenResponse struct {
+	AccessToken string `json:"access_token"`
+	ExpiresIn int `json:"expires_in"`
+}
+
 type Secrets struct {
 	ClientID     string `json:"clientID"`
 	ClientSecret string `json:"clientSecret"`
+}
+
+type AvailableSeedGenres struct {
+	Genres []string `json:"genres"`
 }
 
 var (
@@ -43,10 +52,10 @@ var (
 	baseURI      = "/"
 )
 
+var availableSeedGenres AvailableSeedGenres
+
 // Controller
 func logIn(c echo.Context) error {
-	readSecrets()
-
 	state := generateRandomString(16)
 	scope := "user-read-private user-read-email"
 
@@ -60,6 +69,42 @@ func logIn(c echo.Context) error {
 	authURL := "https://accounts.spotify.com/authorize?" + params.Encode()
 	return c.Redirect(http.StatusFound, authURL)
 
+}
+
+func clientLogIn(c echo.Context) error {
+	
+	readSecrets()
+	
+	params := url.Values{}
+	params.Add("grant_type", "client_credentials")
+	
+	tokenURL := "https://accounts.spotify.com/api/token"
+
+	req, _ := http.NewRequest(http.MethodPost, tokenURL, strings.NewReader(params.Encode()))
+
+	
+	req.Header.Add("content-type", "application/x-www-form-urlencoded")
+	req.Header.Add("Authorization", "Basic "+base64.StdEncoding.EncodeToString([]byte(clientID+":"+clientSecret)))
+
+	res, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return err
+	}
+	
+	var tokenHandler ClientTokenResponse
+	err = json.NewDecoder(res.Body).Decode(&tokenHandler)
+	if err != nil {
+		return err
+	}
+
+	cookie := new(http.Cookie)
+	cookie.Name = "Playgen-Client-Token"
+	cookie.Value = tokenHandler.AccessToken
+	cookie.Expires = time.Now().Add(time.Hour)
+
+	c.SetCookie(cookie)
+
+	return c.Redirect(http.StatusFound, "/getgenres")
 }
 
 // Controller
@@ -82,7 +127,7 @@ func callBack(c echo.Context) error {
 		return err
 	}
 
-	var tokenHandler TokenResponse
+	var tokenHandler UserTokenResponse
 	err = json.NewDecoder(res.Body).Decode(&tokenHandler)
 	if err != nil {
 		return err
@@ -94,6 +139,29 @@ func callBack(c echo.Context) error {
 	cookie.Expires = time.Now().Add(time.Hour)
 
 	c.SetCookie(cookie)
+
+	return c.Redirect(http.StatusFound, baseURI)
+}
+
+
+// Controller
+func getAvailableSeedGenres(c echo.Context) error {
+	requestURL := "https://api.spotify.com/v1/recommendations/available-genre-seeds"
+
+	req, _ := http.NewRequest(http.MethodGet, requestURL, nil)
+	
+
+	req.Header.Add("Authorization", "Bearer " + readCookieValue(c, "Playgen-Client-Token"))
+
+	res, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return err
+	}
+
+	err = json.NewDecoder(res.Body).Decode(&availableSeedGenres)
+	if err!= nil {
+		return err
+	}
 
 	return c.Redirect(http.StatusFound, baseURI)
 }
@@ -118,6 +186,30 @@ func readSecrets() {
 	clientSecret = secrets.ClientSecret
 }
 
+// Util
+func cookieExists(c echo.Context, name string) int {
+	cookie, err := c.Cookie(name)
+	if err != nil {
+		return -1
+	}
+	if cookie.Value == "" {
+		return 0
+	} else {
+		return 1
+	}
+}
+
+// Util
+func readCookieValue(c echo.Context, name string) string {
+	cookie, err := c.Cookie(name)
+	if err != nil {
+		return ""
+	}
+	return cookie.Value
+}
+
+
+
 // Service
 func (t *TemplateRenderer) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
 	tmpl, err := t.templates.Clone()
@@ -139,8 +231,14 @@ func (t *TemplateRenderer) Render(w io.Writer, name string, data interface{}, c 
 }
 
 func home(c echo.Context) error {
+	flag := cookieExists(c, "Playgen-Client-Token")
+	if flag < 1 {
+		clientLogIn(c)
+	}
+	
 	data := map[string]interface{}{
 		"Title": "playgen",
+		"AvailableGenres": availableSeedGenres.Genres,
 	}
 	return c.Render(http.StatusOK, "content.gotmpl", data)
 }
@@ -163,6 +261,7 @@ func main() {
 	e.GET("/", home)
 	e.GET("/login", logIn)
 	e.GET("/callback", callBack)
+	e.GET("/getgenres", getAvailableSeedGenres)
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", *port)))
 }

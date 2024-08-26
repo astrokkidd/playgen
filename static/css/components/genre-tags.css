@@ -4,9 +4,12 @@
 	margin: 20px;
 
 	border-radius: 40px;
-	padding: 10px 20px;
+	
+	padding-block: 10px;
+	padding-inline: 50px;
 
-	margin-bottom: 10px;
+	grid-column: 1 / span 1;
+	grid-row: 1 / span 1;
 }
 
 .genres p {
@@ -22,8 +25,8 @@
 }
 
 .genre-tags input {
-	margin: 0.5rem;
-	padding-block: 0.25rem;
+	/*margin: 0.5rem;*/
+	/*padding-block: 0.25rem;*/
 	border-radius: 20px;
 	width: 100%;
 
