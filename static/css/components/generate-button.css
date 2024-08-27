@@ -1,0 +1,38 @@
+.generate-button {
+
+	margin: 0.5rem 1rem;
+
+
+
+	/*padding-block: 10px;
+	padding-inline: 50px;*/
+
+	/*grid-column: 2 / span 1;*/
+	/*grid-row: 2 / span 1;*/
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+
+
+.generate-button button {
+	font-size: 1.25rem;
+	text-decoration: none;
+	background-color: #341568;
+	color: #59e50d;
+
+	border: none;
+
+	border-radius: 3rem;
+
+	padding: 1rem 3rem;
+	width: 100%;
+
+}
+
+.generate-button button:hover {
+	color: #94dd6c;
+}

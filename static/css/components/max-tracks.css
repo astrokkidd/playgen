@@ -1,12 +1,12 @@
-.sliders {
+.max-tracks {
 	background: #341568;
 
 	margin: 0.5rem 1rem;
 	border-radius: 3rem;
 	padding: 1rem 3rem;
 
-	grid-column: 1 / span 1;
-	grid-row: 1 / span 1;
+	grid-column: 2 / span 1;
+	grid-row: 2 / span 1;
 
 	display: flex;
 	flex-direction: column;
@@ -14,13 +14,13 @@
 	align-items: center;
 }
 
-.sliders input {
+.max-tracks input {
 	width: 100%;
 	accent-color: #59e50d;
 	border: none;
 }
 
-.sliders p {
+.max-tracks p {
 	margin-right: auto;
 	margin-block: 0.3rem;
 	padding-top: 0.5rem;

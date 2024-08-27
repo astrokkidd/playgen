@@ -162,7 +162,7 @@ body p {
 	display: grid;
 	gap: 1rem;
 	padding-top: 7rem;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(2, minmax(19rem, 1fr)) 1fr 1fr;
 	align-items: center;
 }
 

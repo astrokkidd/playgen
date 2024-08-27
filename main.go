@@ -33,7 +33,7 @@ type UserTokenResponse struct {
 
 type ClientTokenResponse struct {
 	AccessToken string `json:"access_token"`
-	ExpiresIn int `json:"expires_in"`
+	ExpiresIn   int    `json:"expires_in"`
 }
 
 type Secrets struct {
@@ -68,21 +68,19 @@ func logIn(c echo.Context) error {
 
 	authURL := "https://accounts.spotify.com/authorize?" + params.Encode()
 	return c.Redirect(http.StatusFound, authURL)
-
 }
 
 func clientLogIn(c echo.Context) error {
-	
+
 	readSecrets()
-	
+
 	params := url.Values{}
 	params.Add("grant_type", "client_credentials")
-	
+
 	tokenURL := "https://accounts.spotify.com/api/token"
 
 	req, _ := http.NewRequest(http.MethodPost, tokenURL, strings.NewReader(params.Encode()))
 
-	
 	req.Header.Add("content-type", "application/x-www-form-urlencoded")
 	req.Header.Add("Authorization", "Basic "+base64.StdEncoding.EncodeToString([]byte(clientID+":"+clientSecret)))
 
@@ -90,7 +88,7 @@ func clientLogIn(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	
+
 	var tokenHandler ClientTokenResponse
 	err = json.NewDecoder(res.Body).Decode(&tokenHandler)
 	if err != nil {
@@ -143,15 +141,13 @@ func callBack(c echo.Context) error {
 	return c.Redirect(http.StatusFound, baseURI)
 }
 
-
 // Controller
 func getAvailableSeedGenres(c echo.Context) error {
 	requestURL := "https://api.spotify.com/v1/recommendations/available-genre-seeds"
 
 	req, _ := http.NewRequest(http.MethodGet, requestURL, nil)
-	
 
-	req.Header.Add("Authorization", "Bearer " + readCookieValue(c, "Playgen-Client-Token"))
+	req.Header.Add("Authorization", "Bearer "+readCookieValue(c, "Playgen-Client-Token"))
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
@@ -159,10 +155,9 @@ func getAvailableSeedGenres(c echo.Context) error {
 	}
 
 	err = json.NewDecoder(res.Body).Decode(&availableSeedGenres)
-	if err!= nil {
+	if err != nil {
 		return err
 	}
-
 
 	fmt.Printf("\n\n%s\n\n", availableSeedGenres)
 
@@ -211,8 +206,6 @@ func readCookieValue(c echo.Context, name string) string {
 	return cookie.Value
 }
 
-
-
 // Service
 func (t *TemplateRenderer) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
 	tmpl, err := t.templates.Clone()
@@ -238,9 +231,9 @@ func home(c echo.Context) error {
 	if flag < 1 {
 		clientLogIn(c)
 	}
-	
+
 	data := map[string]interface{}{
-		"Title": "playgen",
+		"Title":               "playgen",
 		"AvailableSeedGenres": availableSeedGenres,
 	}
 	return c.Render(http.StatusOK, "content.gotmpl", data)
@@ -254,15 +247,19 @@ func main() {
 		templates: template.Must(template.ParseGlob("templates/*.gotmpl")),
 	}
 
-
 	fmt.Printf("\n\n%s\n\n", availableSeedGenres)
 
 	e.Renderer = renderer
 
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	e.Use(
+		middleware.Logger(),
+		middleware.Recover(),
+		middleware.CSRF(),
+		middleware.Secure(),
+		middleware.Static("static"),
+	)
 
-	e.Static("/", "static")
+	//e.Static("/", "static")
 
 	e.GET("/", home)
 	e.GET("/login", logIn)

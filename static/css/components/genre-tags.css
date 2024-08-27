@@ -1,12 +1,9 @@
 .genres {
 	background: #341568;
 
-	margin: 20px;
-
-	border-radius: 40px;
-	
-	padding-block: 10px;
-	padding-inline: 50px;
+	margin: 0.5rem 1rem;
+	border-radius: 3rem;
+	padding: 1rem 3rem;
 
 	grid-column: 1 / span 1;
 	grid-row: 1 / span 1;
@@ -21,13 +18,11 @@
 	align-items: center;
 	justify-content: flex-start;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 1rem;
 }
 
 .genre-tags input {
-	/*margin: 0.5rem;*/
-	/*padding-block: 0.25rem;*/
-	border-radius: 20px;
+	border-radius: 1rem;
 	width: 100%;
 
 	background-color: #461b91;
@@ -42,8 +37,8 @@
 	column-gap: 0.5rem;
 	width: max-content;
 
-	padding: 6px;
-	border-radius: 16px;
+	padding: 0.5rem;
+	border-radius: 1rem;
 
 	background-color: #461b91;
 	color: #59e50d;
