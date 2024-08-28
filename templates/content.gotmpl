@@ -1,8 +1,9 @@
 {{ template "layout.gotmpl" . }}
 
 {{ define "content" }}
-	
-	{{ template "sliders.gotmpl" . }}
+	<div class = "sliders-form">	
+		{{ template "sliders.gotmpl" . }}
+	</div>
 
 	<div class = "form-group">
 		{{ template "genre-tags.gotmpl" . }}

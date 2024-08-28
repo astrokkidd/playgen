@@ -169,5 +169,14 @@ body p {
 @media (max-width: 784px) {
 	.content {
 		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 1fr;
+	}
+
+	.sliders-form {
+		height: auto;
+	}
+
+	.form-group {
+		height: auto;
 	}
 }
