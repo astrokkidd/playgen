@@ -1,7 +1,5 @@
-.form-group {
+.sliders-form {
 	display: flex;
 	flex-direction: column;
 	justify-items: center;
-
-	height: 80%;
 }

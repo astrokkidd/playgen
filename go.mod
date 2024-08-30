@@ -1,4 +1,4 @@
-module playgen
+module github.com/astrokkidd/playgen
 
 go 1.22.6
 
