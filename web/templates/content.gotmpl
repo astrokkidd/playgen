@@ -1,14 +1,21 @@
 {{ template "layout.gotmpl" . }}
 
 {{ define "content" }}
-	<div class = "sliders-form">	
+	<div class = "form-group col1">	
 		{{ template "attribute-sliders.gotmpl" . }}
 	</div>
 
-	<div class = "form-group">
+	<div class = "form-group col2">
 		{{ template "seed-genres.gotmpl" . }}
+	</div>
+
+	<div class = "form-group col3">
 		{{ template "seed-artists.gotmpl" . }}
 		{{ template "max-tracks.gotmpl" . }}
+	</div>
+
+	<div class = "form-group col4">
+		{{ template "seed-tracks.gotmpl" . }}
 		{{ template "generate-button.gotmpl" . }}
 	</div>
 {{ end }}

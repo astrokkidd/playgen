@@ -1,5 +1,6 @@
 .form-group {
 	display: flex;
 	flex-direction: column;
-	justify-items: center;
+	justify-items: start;
+	height: 80%;
 }

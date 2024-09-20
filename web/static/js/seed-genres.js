@@ -47,17 +47,17 @@ window.addEventListener("load", (e) => {
 
 
 function RenderTags() {
-	const genre_tags = document.querySelector(".genre-tags")
+	const genre_tags = document.querySelector(".tags")
 	let cache = ""
 
-	document.querySelectorAll(".genre-tag").forEach(e => e.remove())
+	document.querySelectorAll(".tag").forEach(e => e.remove())
 	cache = ""
 
 	tags_list.forEach(e => {
-		cache = `<div class = "genre-tag">
+		cache = `<div class = "tag">
 				<span>${e.text}</span>
 				<button type="button" data-id="${e.id}"class="btn-rm-tag">
-					<i class="ti ti-x"></i>
+					<img src="./x.svg"/>
 				</button>
 			</div>`;
 		genre_tags.insertAdjacentHTML("afterbegin", cache)

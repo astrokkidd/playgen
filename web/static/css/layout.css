@@ -152,7 +152,7 @@ body {
 	background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 15l15 15H0V15zM15 0l15 15V0H15z' fill='%23341568' fill-opacity='0.58' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
-body p {
+body h3 {
 	font-size: 1.5rem;
 }
 
@@ -162,14 +162,14 @@ body p {
 	display: grid;
 	gap: 1rem;
 	padding-top: 7rem;
-	grid-template-columns: repeat(2, minmax(19rem, 1fr)) 1fr 1fr;
+	grid-template-columns: repeat(4, minmax(19rem, 1fr));
 	align-items: center;
 }
 
 @media (max-width: 784px) {
 	.content {
 		grid-template-columns: 1fr;
-		grid-template-rows: 1fr 1fr;
+		grid-template-rows: repeat(4, 1fr);
 	}
 
 	.sliders-form {
@@ -178,5 +178,28 @@ body p {
 
 	.form-group {
 		height: auto;
+	}
+
+
+	.col1 {
+
+		grid-column: auto;
+		grid-row: 1 / span 1;
+	}
+
+	.col2 {
+		grid-column: auto;
+		grid-row: 2 / span 1;
+	}
+
+	.col3 {
+		grid-column: auto;
+		grid-row: 3 / span 1;
+
+	}
+
+	.col4 {
+		grid-column: auto;
+		grid-row: 4 / span 1;
 	}
 }

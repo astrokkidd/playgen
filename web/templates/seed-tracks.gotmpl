@@ -1,0 +1,14 @@
+<div class="form tracks">
+	<h3>seed tracks</h3>
+	<div class = "tags">
+	</div>
+	<input type="text" list="available-seed-tracks" class="input-tag">
+	<datalist id="available-seed-tracks" class="available-seed-tracks">
+	</datalist>
+</div>
+
+<script type="text/javascript">
+	var availableSeedTracks = {{ .AvailableSeedTracks }}
+</script>
+
+<script src="js/seed-tracks.js"></script>

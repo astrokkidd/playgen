@@ -2,9 +2,11 @@
 @import "./footer.css";
 @import "./page-not-found.css";
 @import "./sliders.css";
-@import "./seed-genres.css";
 @import "./seed-artists.css";
+@import "./seed-tracks.css";
 @import "./form-group.css";
 @import "./max-tracks.css";
 @import "./generate-button.css";
 @import "./sliders-form.css";
+@import "./form.css";
+@import "./columns.css";
