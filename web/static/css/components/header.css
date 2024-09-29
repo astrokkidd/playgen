@@ -3,8 +3,8 @@ header {
 	top: 0;
 	z-index: 10;
 	width: 100%;
-	background: #341568;
-	box-shadow: 0px 5px 5px #220D44;
+	background: #2C003D;
+	box-shadow: 0px 5px 5px #1D0029;
 }
 
 .header {
@@ -12,7 +12,7 @@ header {
 	justify-content: space-between;
 	width: 80%;
 	margin-inline: auto;
-	padding-block: 2rem;
+	padding-block: 1rem;
 	align-items: center;
 }
 
@@ -24,9 +24,9 @@ header {
 .login a {
 	font-size: 1.5rem;
 	text-decoration: none;
-	color: #59e50d;
+	color: #E4BE14;
 }
 
 .login a:hover {
-	color: #94dd6c;
+	color: #F2D969;
 }

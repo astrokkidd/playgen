@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"html/template"
 	"os"
+	//"fmt"
 )
 
 type Config struct {
@@ -62,11 +63,22 @@ func LoadTemplates() *template.Template {
 	return template.Must(template.ParseGlob("web/templates/*.gotmpl"))
 }
 
-func NewConfig() *Config {
+func NewAuthConfig() *Config {
 	secrets := readSecrets()
 	return &Config{
 		ClientID:     secrets.ClientID,
 		ClientSecret: secrets.ClientSecret,
+		RedirectURI:  "http://localhost:3000/callback",
+		BaseURI:      "/",
+	}
+}
+
+func NewAPIConfig(clientToken string) *Config {
+	secrets := readSecrets()
+	return &Config{
+		ClientID:     secrets.ClientID,
+		ClientSecret: secrets.ClientSecret,
+		ClientToken:  clientToken,
 		RedirectURI:  "http://localhost:3000/callback",
 		BaseURI:      "/",
 	}

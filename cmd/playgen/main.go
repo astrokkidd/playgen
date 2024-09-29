@@ -14,21 +14,13 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-var (
-	clientID     = ""
-	clientSecret = ""
-	redirectURI  = "http://localhost:3000/callback"
-	baseURI      = "/"
-)
-
 func main() {
 	port := flag.Int("p", 3000, "port")
 	e := echo.New()
 
-	config := services.NewConfig()
-
+	AuthConfig := services.NewAuthConfig()
 	authHandler := auth.Handler{
-		Config: config,
+		Config: AuthConfig,
 	}
 
 	clientToken, err := authHandler.ClientLogIn()
@@ -36,7 +28,12 @@ func main() {
 		panic(err)
 	}
 
-	availableSeedGenres, err := api.GetAvailableSeedGenres(*clientToken)
+	APIConfig := services.NewAPIConfig(*clientToken)
+	apiHandler := api.Handler{
+		Config: APIConfig,
+	}
+
+	availableSeedGenres, err := apiHandler.GetAvailableSeedGenres()
 	if err != nil {
 		panic(err)
 	}
@@ -62,7 +59,7 @@ func main() {
 	e.GET("/", homeController.RenderHome)
 	e.GET("/login", authHandler.LogIn)
 	e.GET("/callback", authHandler.CallBack)
-	//e.GET("/getgenres", controllers.getAvailableSeedGenres)
+	e.POST("/generate", apiHandler.GetRecommendations)
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", *port)))
 }

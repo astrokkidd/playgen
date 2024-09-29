@@ -21,8 +21,8 @@
 .generate-button button {
 	font-size: 1.25rem;
 	text-decoration: none;
-	background-color: #341568;
-	color: #59e50d;
+	background-color: #2B003D;
+	color: #E4BE14;
 
 	border: none;
 
@@ -34,5 +34,5 @@
 }
 
 .generate-button button:hover {
-	color: #94dd6c;
+	color: #F2D969;
 }

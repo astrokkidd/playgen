@@ -1,6 +1,10 @@
 .form-group {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 	justify-items: start;
-	height: 80%;
+	height: 100%;
+	width: 80%;
+	padding-top: 3rem;
+	background-color: #E7E2D6;
+	box-shadow: -5px 0px 5px #1D0029, 5px 0px 5px #1D0029;
 }
