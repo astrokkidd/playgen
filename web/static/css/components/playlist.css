@@ -1,0 +1,39 @@
+.add-button {
+	margin: 0.5rem 1rem;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.add-button button {
+	font-size: 1.25rem;
+	text-decoration: none;
+	background-color: #2B003D;
+	color: #E4BE14;
+
+	border: none;
+
+	border-radius: 3rem;
+
+	padding: 1rem 3rem;
+	width: 100%;
+
+}
+
+.tracks-list {
+    grid-column: 1 / span 2;
+    
+}
+
+.track {
+    background-color: #F0EDE5;
+    box-shadow: 5px 5px 5px #8E7E52;
+    margin-block: 1rem;
+}
+
+.track span {
+    color:#2B003D;
+}

@@ -46,8 +46,8 @@ document.querySelector("button[type='submit']").addEventListener("click", functi
             cache = `<li class="track">
                         <a href="${track.external_urls.spotify}" target="_blank">play</a>
 	                    <img src="${track.album.images[0].url}" width="50" height="50">
-	                    <span>${track.name}</span>
-	                    <span>${track.artists.map((artist) => artist.name).join(', ')}</span>
+	                    <span class="name">${track.name}</span>
+	                    <span class="artist">${track.artists.map((artist) => artist.name).join(', ')}</span>
                     </li>`;
                     tracks_list.insertAdjacentHTML("afterbegin", cache);
         })
