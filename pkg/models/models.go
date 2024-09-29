@@ -16,12 +16,12 @@ type AvailableSeedGenres struct {
 }
 
 type Recommendation struct {
-	Acousticness     int      `json:"target_acousticness"`
-	Danceability     int      `json:"target_danceability"`
-	Energy           int      `json:"target_energy"`
-	Instrumentalness int      `json:"target_instrumentalness"`
+	Acousticness     float32      `json:"target_acousticness"`
+	Danceability     float32      `json:"target_danceability"`
+	Energy           float32      `json:"target_energy"`
+	Instrumentalness float32      `json:"target_instrumentalness"`
 	Popularity       int      `json:"target_popularity"`
-	Valence          int      `json:"target_valence"`
+	Valence          float32      `json:"target_valence"`
 	Limit	         string      `json:"limit"`
 	Genres           string `json:"seed_genres"`
 }
@@ -45,6 +45,7 @@ type Artist struct {
 type Track struct {
 	Name string `json:"name"`
 	URI string `json:"uri"`
+	URL struct { SpotifyURL string `json:"spotify"`} `json:"external_urls"`
 	Artists []Artist `json:"artists"`
 	Album Album `json:"album"`
 }

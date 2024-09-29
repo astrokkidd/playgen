@@ -51,7 +51,7 @@ func main() {
 	e.Use(
 		middleware.Logger(),
 		middleware.Recover(),
-		middleware.CSRF(),
+		//middleware.CSRF(),
 		middleware.Secure(),
 		middleware.Static("web/static"),
 	)
