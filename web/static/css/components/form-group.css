@@ -1,10 +1,13 @@
-.form-group {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-items: start;
+main {
 	height: 100%;
 	width: 80%;
 	padding-top: 3rem;
 	background-color: #E7E2D6;
 	box-shadow: -5px 0px 5px #1D0029, 5px 0px 5px #1D0029;
+}
+
+.form-group {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-items: start;
 }

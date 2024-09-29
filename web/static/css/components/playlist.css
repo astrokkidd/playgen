@@ -1,3 +1,7 @@
+.playlist {
+	background-color: #E7E2D6;
+}
+
 .add-button {
 	margin: 0.5rem 1rem;
 
@@ -19,21 +23,22 @@
 	border-radius: 3rem;
 
 	padding: 1rem 3rem;
-	width: 100%;
+	width: 25rem;
 
 }
 
 .tracks-list {
-    grid-column: 1 / span 2;
-    
+	grid-column: 1 / span 2;
+
 }
 
 .track {
-    background-color: #F0EDE5;
-    box-shadow: 5px 5px 5px #8E7E52;
-    margin-block: 1rem;
+	background-color: #F0EDE5;
+	box-shadow: 5px 5px 5px #8E7E52;
+	margin-block: 1rem;
+	margin-inline: 5rem;
 }
 
 .track span {
-    color:#2B003D;
+	color: #2B003D;
 }
