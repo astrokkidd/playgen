@@ -10,6 +10,7 @@
 	grid-template-columns: auto 1fr;
 	width: 60%;
 	align-items: center;
+	margin-block: 1rem;
 }
 
 .playlist-title {
@@ -17,8 +18,12 @@
 	font-size: 3rem;
 	color: #2B003D;
 	margin-left: 2rem;
-	background-color: #E7E2D6;
+	background-color: #F0EDE5;
 	border: none;
+	width: 28rem;
+	padding: 1rem;
+	border-radius: 1rem;
+	box-shadow: 5px 5px 5px #8E7E52;
 }
 
 .playlist-image {
