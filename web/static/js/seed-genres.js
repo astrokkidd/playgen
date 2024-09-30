@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			cache = `<div class = "tag">
 					<span>${e.text}</span>
 					<button type="button" data-id="${e.id}" tag-type="genre" class="btn-rm-tag genre">
-						<img src="./x.svg"/>
+						<img src="./media/x.svg"/>
 					</button>
 				</div>`;
 			genre_tags.insertAdjacentHTML("afterbegin", cache)

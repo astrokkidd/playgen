@@ -13,14 +13,9 @@
 			{{ template "generate-button.gotmpl" . }}
 		</div>
 	</div>
+	
+	{{ template "playlist" . }}
 
-	<div class="playlist">
-		<div class="add-button" id="add-button">
-		</div>
-
-		<ul id="tracks-list" class="tracks-list">
-		</ul>
-	</div>
 </main>
 	<!-- <div class = "form-group col3">
 		{{ template "seed-artists.gotmpl" . }}
@@ -29,5 +24,4 @@
 	<div class = "form-group col4">
 		{{ template "seed-tracks.gotmpl" . }}
 	</div> -->
-	</div>
 {{ end }}

@@ -1,5 +1,32 @@
 .playlist {
 	background-color: #E7E2D6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.playlist-header {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	width: 60%;
+	align-items: center;
+}
+
+.playlist-title {
+	font-family: "League Spartan";
+	font-size: 3rem;
+	color: #2B003D;
+	margin-left: 2rem;
+	background-color: #E7E2D6;
+	border: none;
+}
+
+.playlist-image {
+	display: grid;
+	grid-template: repeat(2, auto) / repeat(2, auto);
+	justify-content: start;
+	box-shadow: 5px 5px 5px #8E7E52;
+
 }
 
 .add-button {
@@ -29,7 +56,6 @@
 
 .tracks-list {
 	grid-column: 1 / span 2;
-
 }
 
 .track {
@@ -37,8 +63,46 @@
 	box-shadow: 5px 5px 5px #8E7E52;
 	margin-block: 1rem;
 	margin-inline: 5rem;
+	display: grid;
+	grid-template-columns: auto auto 1fr;
+	grid-template-rows: 1fr 1fr;
+	border-radius: 1rem;
+}
+
+.track audio {
+	grid-column: 1 / span 1;
+	grid-row: 1 / span 2;
+
+	margin-left: 1rem;
+	margin-block: auto;
+	border-radius: 3rem;
+	box-shadow: 3px 3px 5px #8E7E52;
+}
+
+.track .album {
+	grid-column: 2 / span 1;
+	grid-row: 1 / span 2;
+
+	margin: 1rem;
+
+	border-radius: 5px;
+
+	box-shadow: 3px 3px 5px #8E7E52;
 }
 
 .track span {
+	grid-column: 3 / span 1;
 	color: #2B003D;
+}
+
+.track .name {
+	grid-row: 1 / span 1;
+	font-size: 1.25rem;
+	font-weight: bold;
+
+	margin-top: auto;
+}
+
+.track .artist {
+	grid-row: 2 / span 1;
 }

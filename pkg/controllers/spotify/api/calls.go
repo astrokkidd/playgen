@@ -2,11 +2,11 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/url"
-	"fmt"
 	//"io"
-	
+
 	//"strings"
 	"github.com/astrokkidd/playgen/pkg/models"
 	"github.com/astrokkidd/playgen/pkg/services"
@@ -23,7 +23,7 @@ func (h *Handler) GetAvailableSeedGenres() (*models.AvailableSeedGenres, error) 
 
 	req, _ := http.NewRequest(http.MethodGet, requestURL, nil)
 
-	req.Header.Add("Authorization", "Bearer "+ h.Config.ClientToken)
+	req.Header.Add("Authorization", "Bearer "+h.Config.ClientToken)
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
@@ -40,7 +40,7 @@ func (h *Handler) GetAvailableSeedGenres() (*models.AvailableSeedGenres, error) 
 	return &availableSeedGenres, nil
 }
 
-func (h *Handler) GetRecommendations(c echo.Context) (error) {
+func (h *Handler) GetRecommendations(c echo.Context) error {
 	var request models.Recommendation
 	if err := c.Bind(&request); err != nil {
 		return err
@@ -58,10 +58,8 @@ func (h *Handler) GetRecommendations(c echo.Context) (error) {
 	params.Add("target_popularity", fmt.Sprintf("%d", request.Popularity))
 	params.Add("target_valence", fmt.Sprintf("%f", request.Valence))
 
-	fmt.Printf("\n\n%s\n\n", params.Encode())
-	
 	req, _ := http.NewRequest("GET", requestURL+"?"+params.Encode(), nil)
-    req.Header.Add("Authorization", "Bearer "+ h.Config.ClientToken)
+	req.Header.Add("Authorization", "Bearer "+h.Config.ClientToken)
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
@@ -96,3 +94,4 @@ func (h *Handler) GetRecommendations(c echo.Context) (error) {
 	}
 
 }*/
+

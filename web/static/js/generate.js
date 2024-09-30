@@ -16,6 +16,7 @@ document.querySelector("button[type='submit']").addEventListener("click", functi
 
     const tracks_list = document.querySelector(".tracks-list");
     const add_button = document.querySelector(".add-button");
+    const playlist_header = document.querySelector(".playlist-header");
 
     // Create a JSON object with the form data
     const formData = {
@@ -39,13 +40,16 @@ document.querySelector("button[type='submit']").addEventListener("click", functi
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Playlist generated:', data);
+        console.log('Playlist generated:', data.tracks);
         // Do something with the server's response
         //for each track in data.tracks
+
         data.tracks.forEach(track => {
             cache = `<li class="track">
-                        <a href="${track.external_urls.spotify}" target="_blank">play</a>
-	                    <img src="${track.album.images[0].url}" width="50" height="50">
+                            <audio controls controls-list="play" src="${track.preview_url}">
+                                <img src="./media/play.svg"/>
+                            </audio>
+	                    <img class="album" src="${track.album.images[0].url}" width="50" height="50" aria-label="${track.name} Album Art">
 	                    <span class="name">${track.name}</span>
 	                    <span class="artist">${track.artists.map((artist) => artist.name).join(', ')}</span>
                     </li>`;
@@ -54,6 +58,15 @@ document.querySelector("button[type='submit']").addEventListener("click", functi
 
         cache = `<button type="submit">ADD TO SPOTIFY</button>`;
         add_button.insertAdjacentHTML("afterbegin", cache);
+
+        cache = `<div class="playlist-image">
+			<img src="${data.tracks[0].album.images[0].url}" width="70" height="70">
+			<img src="${data.tracks[1].album.images[0].url}" width="70" height="70">
+			<img src="${data.tracks[2].album.images[0].url}" width="70" height="70">
+			<img src="${data.tracks[3].album.images[0].url}" width="70" height="70">
+		</div>
+		<input type="text" class="playlist-title" value="My Generated Playlist">`;
+        playlist_header.insertAdjacentHTML("afterbegin", cache);
 
         //create html ul
         //image, name, artist(s)
